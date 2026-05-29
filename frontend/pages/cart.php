@@ -15,18 +15,18 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action'])) {
     
     if ($_POST['action'] === 'remove') {
         $cartModel->removeItem(intval($_POST['cart_id']));
-        $message = 'Đã xóa sách khỏi giỏ hàng.';
+        $message = 'Book removed from cart.';
         $messageType = 'success';
     } elseif ($_POST['action'] === 'clear') {
         $cartModel->clear();
-        $message = 'Đã xóa toàn bộ giỏ hàng.';
+        $message = 'Cart cleared successfully.';
         $messageType = 'success';
     } elseif ($_POST['action'] === 'checkout') {
         require_once __DIR__ . '/../../backend/controllers/RentalController.php';
         $rentalController = new RentalController();
         $result = $rentalController->checkout($_SESSION['user_id']);
         if ($result['success']) {
-            $message = 'Thuê sách thành công! Xem sách đã thuê trong mục Tổng Quan.';
+            $message = 'Book rented successfully! View your rentals in the dashboard.';
             $messageType = 'success';
         } else {
             $message = $result['message'];
@@ -44,8 +44,8 @@ $cartTotal = $cartModel->getTotal();
 <section style="padding: 120px 0 60px; min-height: 100vh;">
     <div class="container">
         <div style="margin-bottom: 32px;">
-            <h1 style="font-size: 2rem; margin-bottom: 4px;">Giỏ Hàng Của Bạn</h1>
-            <p style="color: var(--text-muted); margin: 0;">Xem lại sách bạn muốn thuê</p>
+            <h1 style="font-size: 2rem; margin-bottom: 4px;">Your Cart</h1>
+            <p style="color: var(--text-muted); margin: 0;">Review the books you want to rent</p>
         </div>
         
         <?php if ($message): ?>
@@ -61,10 +61,10 @@ $cartTotal = $cartModel->getTotal();
                 <div class="empty-state-icon">
                     <i class="fas fa-shopping-cart"></i>
                 </div>
-                <h3>Giỏ Hàng Trống</h3>
-                <p>Bắt đầu khám phá bộ sưu tập sách của chúng tôi</p>
+                <h3>Your Cart is Empty</h3>
+                <p>Start exploring our book collection</p>
                 <a href="books.php" class="btn btn-primary">
-                    <i class="fas fa-book"></i> Khám Phá Sách
+                    <i class="fas fa-book"></i> Discover Books
                 </a>
             </div>
             <?php else: ?>
@@ -85,23 +85,23 @@ $cartTotal = $cartModel->getTotal();
                     </div>
                     <div class="cart-item-meta">
                         <div class="cart-item-price">
-                            <span class="label">Giá/ngày</span>
+                            <span class="label">Price/day</span>
                             <span class="value"><?php echo number_format($item['price_per_day'], 0); ?>đ</span>
                         </div>
                         <div class="cart-item-days">
-                            <span class="label">Số ngày</span>
+                            <span class="label">Days</span>
                             <span class="value"><?php echo $item['rental_days']; ?> ngày</span>
                         </div>
                     </div>
                     <div class="cart-item-total">
-                        <span class="label">Tổng</span>
+                        <span class="label">Total</span>
                         <span class="value"><?php echo number_format($itemTotal, 0); ?>đ</span>
                     </div>
                     <div class="cart-item-actions">
                         <form method="POST" style="display: inline;">
                             <input type="hidden" name="action" value="remove">
                             <input type="hidden" name="cart_id" value="<?php echo $item['id']; ?>">
-                            <button type="submit" class="btn-remove" title="Xóa">
+                            <button type="submit" class="btn-remove" title="Remove">
                                 <i class="fas fa-trash"></i>
                             </button>
                         </form>
@@ -114,7 +114,7 @@ $cartTotal = $cartModel->getTotal();
                 <div class="cart-footer-left">
                     <form method="POST" style="display: inline;">
                         <input type="hidden" name="action" value="clear">
-                        <button type="submit" class="btn btn-outline btn-sm" onclick="return confirm('Xóa toàn bộ giỏ hàng?')">
+                        <button type="submit" class="btn btn-outline btn-sm" onclick="return confirm('Clear the entire cart?')">
                             <i class="fas fa-trash"></i> Xóa toàn bộ
                         </button>
                     </form>
@@ -123,34 +123,34 @@ $cartTotal = $cartModel->getTotal();
                 <div class="cart-footer-right">
                     <!-- Coupon Section -->
                     <div class="coupon-section">
-                        <input type="text" id="couponCode" class="coupon-input" placeholder="Nhập mã giảm giá (VD: WELCOME10)">
+                        <input type="text" id="couponCode" class="coupon-input" placeholder="Enter discount code (e.g. WELCOME10)">
                         <button type="button" class="btn btn-outline btn-sm" onclick="applyCoupon()">
-                            <i class="fas fa-tag"></i> Áp dụng
+                            <i class="fas fa-tag"></i> Apply
                         </button>
                     </div>
                     
                     <div class="cart-summary">
                         <div class="cart-summary-row">
-                            <span>Tạm tính (<?php echo count($cartItems); ?> cuốn)</span>
+                            <span>Tạm tính (<?php echo count($cartItems); ?> items)</span>
                             <span class="cart-subtotal"><?php echo number_format($cartTotal, 0); ?>đ</span>
                         </div>
                         <div class="cart-summary-row discount-row" style="display: none;">
-                            <span>Giảm giá</span>
+                            <span>Discount</span>
                             <span class="cart-discount">-0đ</span>
                         </div>
                         <div class="cart-summary-row total-row">
-                            <span>Tổng cộng</span>
+                            <span>Total</span>
                             <span class="cart-total"><?php echo number_format($cartTotal, 0); ?>đ</span>
                         </div>
                     </div>
                     
                     <div class="cart-actions">
                         <a href="books.php" class="btn btn-outline">
-                            <i class="fas fa-arrow-left"></i> Tiếp Tục Mua Sắm
+                            <i class="fas fa-arrow-left"></i> Continue Shopping
                         </a>
                         <form method="POST" style="display: inline;">
                             <button type="submit" name="action" value="checkout" class="btn btn-primary btn-lg">
-                                <i class="fas fa-check"></i> Xác Nhận Thuê
+                                <i class="fas fa-check"></i> Confirm Rental
                             </button>
                         </form>
                     </div>

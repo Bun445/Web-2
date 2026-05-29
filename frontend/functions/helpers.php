@@ -70,11 +70,11 @@ function jsonResponse($data) {
 
 function getStatusLabel($status) {
     $labels = [
-        'pending' => 'Chờ xác nhận',
-        'active' => 'Đang thuê',
-        'returned' => 'Đã trả',
-        'overdue' => 'Quá hạn',
-        'cancelled' => 'Đã hủy'
+        'pending' => 'Pending confirmation',
+        'active' => 'Active',
+        'returned' => 'Returned',
+        'overdue' => 'Overdue',
+        'cancelled' => 'Cancelled'
     ];
     return $labels[$status] ?? $status;
 }
@@ -144,16 +144,16 @@ function timeAgo($datetime) {
     $diff = time() - $time;
     
     if ($diff < 60) {
-        return 'Vừa xong';
+        return 'Just now';
     } elseif ($diff < 3600) {
         $mins = floor($diff / 60);
-        return $mins . ' phút trước';
+        return $mins . ' minutes ago';
     } elseif ($diff < 86400) {
         $hours = floor($diff / 3600);
-        return $hours . ' giờ trước';
+        return $hours . ' hours ago';
     } elseif ($diff < 604800) {
         $days = floor($diff / 86400);
-        return $days . ' ngày trước';
+        return $days . ' days ago';
     } else {
         return date('d/m/Y', $time);
     }

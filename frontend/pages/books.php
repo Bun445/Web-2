@@ -10,13 +10,13 @@ $category = isset($_GET['category']) ? $_GET['category'] : '';
 
 if (!empty($search)) {
     $books = $bookController->search($search);
-    $pageTitle = 'Tìm Kiếm: ' . htmlspecialchars($search);
+    $pageTitle = 'Search: ' . htmlspecialchars($search);
 } elseif (!empty($category)) {
     $books = $bookController->category($category);
-    $pageTitle = 'Sách ' . htmlspecialchars($category);
+    $pageTitle = 'Books: ' . htmlspecialchars($category);
 } else {
     $books = $bookController->index();
-    $pageTitle = 'Tất Cả Sách';
+    $pageTitle = 'All Books';
 }
 
 function getBookCover($title) {
@@ -39,7 +39,7 @@ function getBookCoverLocal($book) {
                 </div>
                 <div>
                     <h1 class="page-title"><?php echo $pageTitle; ?></h1>
-                    <p class="page-subtitle"><?php echo count($books); ?> sách được tìm thấy</p>
+                    <p class="page-subtitle"><?php echo count($books); ?> books found</p>
                 </div>
             </div>
         </div>
@@ -50,15 +50,15 @@ function getBookCoverLocal($book) {
 <section class="filter-section">
     <div class="container">
         <form action="books.php" method="GET" class="filter-bar">
-            <input type="text" name="search" placeholder="Tìm kiếm theo tên sách, tác giả..." 
+            <input type="text" name="search" placeholder="Search for title or author..." 
                    value="<?php echo htmlspecialchars($search); ?>"
                    class="filter-input">
             <button type="submit" class="btn btn-primary">
-                <i class="fas fa-search"></i> Tìm Kiếm
+                <i class="fas fa-search"></i> Search
             </button>
             <?php if (!empty($search) || !empty($category)): ?>
             <a href="books.php" class="btn btn-outline">
-                <i class="fas fa-times"></i> Xóa
+                <i class="fas fa-times"></i> Clear
             </a>
             <?php endif; ?>
         </form>
@@ -86,15 +86,15 @@ function getBookCoverLocal($book) {
             <div class="book-card">
                 <?php if ($book['quantity'] > 0): ?>
                 <span class="book-discount available">
-                    <i class="fas fa-check"></i> Còn hàng
+                    <i class="fas fa-check"></i> In stock
                 </span>
                 <?php else: ?>
                 <span class="book-discount unavailable">
-                    <i class="fas fa-times"></i> Hết hàng
+                    <i class="fas fa-times"></i> Out of stock
                 </span>
                 <?php endif; ?>
                 
-                <button class="book-wishlist" data-book-id="<?php echo $book['id']; ?>" title="Yêu Thích">
+                <button class="book-wishlist" data-book-id="<?php echo $book['id']; ?>" title="Favorite">
                     <i class="far fa-heart"></i>
                 </button>
                 
@@ -105,10 +105,10 @@ function getBookCoverLocal($book) {
                 </div>
                 
                 <div class="book-info">
-                    <span class="book-category"><?php echo htmlspecialchars((string)($book['category'] ?? 'Sách')); ?></span>
+                    <span class="book-category"><?php echo htmlspecialchars((string)($book['category'] ?? 'Books')); ?></span>
                     <h3 class="book-title"><?php echo htmlspecialchars((string)($book['title'] ?? '')); ?></h3>
                     <p class="book-author">
-                        <i class="fas fa-user-edit"></i> <?php echo htmlspecialchars((string)($book['author'] ?? 'Tác giả')); ?>
+                        <i class="fas fa-user-edit"></i> <?php echo htmlspecialchars((string)($book['author'] ?? 'Author')); ?>
                     </p>
                     
                     <div class="book-footer">
@@ -117,7 +117,7 @@ function getBookCoverLocal($book) {
                             <span class="book-price-original">/ngày</span>
                         </div>
                         <?php if ($book['quantity'] > 0): ?>
-                        <a href="book-detail.php?id=<?php echo $book['id']; ?>" class="btn btn-sm">Thuê</a>
+                        <a href="book-detail.php?id=<?php echo $book['id']; ?>" class="btn btn-sm">Rent</a>
                         <?php else: ?>
                         <span class="text-muted small">Hết Hàng</span>
                         <?php endif; ?>
@@ -131,10 +131,10 @@ function getBookCoverLocal($book) {
             <div class="empty-state-icon">
                 <i class="fas fa-search"></i>
             </div>
-            <h3>Không Tìm Thấy Sách</h3>
-            <p class="section-subtitle">Thử điều chỉnh từ khóa tìm kiếm hoặc bộ lọc.</p>
+            <h3>No Books Found</h3>
+            <p class="section-subtitle">Try adjusting the search terms or filters.</p>
             <a href="books.php" class="btn btn-primary">
-                <i class="fas fa-book"></i> Xem Tất Cả Sách
+                <i class="fas fa-book"></i> View All Books
             </a>
         </div>
         <?php endif; ?>
@@ -150,8 +150,8 @@ function getBookCoverLocal($book) {
                     <i class="fas fa-compass"></i>
                 </div>
                 <div>
-                    <h2 class="section-title">Khám Phá Thêm</h2>
-                    <p class="section-subtitle">Tìm sách theo thể loại</p>
+                    <h2 class="section-title">Discover More</h2>
+                    <p class="section-subtitle">Browse books by genre</p>
                 </div>
             </div>
         </div>

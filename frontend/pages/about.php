@@ -1,6 +1,6 @@
 <?php
 require_once __DIR__ . '/../templates/header.php';
-$pageTitle = 'Về Chúng Tôi';
+$pageTitle = 'About Us';
 ?>
 
 <!-- Page Header -->
@@ -12,8 +12,8 @@ $pageTitle = 'Về Chúng Tôi';
                     <i class="fas fa-info-circle"></i>
                 </div>
                 <div>
-                    <h1 class="page-title">Về MÂY MƠ BOOK</h1>
-                    <p class="page-subtitle">Câu chuyện của chúng tôi</p>
+                    <h1 class="page-title">About MÂY MƠ BOOK</h1>
+                    <p class="page-subtitle">Our story</p>
                 </div>
             </div>
         </div>
@@ -25,39 +25,39 @@ $pageTitle = 'Về Chúng Tôi';
     <div class="container">
         <div class="about-grid">
             <div class="about-content animate-on-scroll">
-                <h2>Chào mừng đến với MÂY MƠ BOOK</h2>
-                <p>MÂY MƠ BOOK là nền tảng thuê sách trực tuyến hàng đầu Việt Nam, được thành lập với sứ mệnh mang đến cho người yêu sách cơ hội tiếp cận với kho tàng tri thức khổng lồ một cách dễ dàng và tiết kiệm.</p>
+                <h2>Welcome to MÂY MƠ BOOK</h2>
+                <p>MÂY MƠ BOOK is Vietnam's leading online book rental platform, founded to help book lovers access a vast library of titles easily and affordably.</p>
                 
-                <p>Với hơn <strong>15,000+ đầu sách</strong> thuộc nhiều thể loại đa dạng, từ tiểu thuyết, sách kỹ năng, đến các tác phẩm văn học kinh điển, chúng tôi cam kết mang đến trải nghiệm đọc sách tốt nhất cho bạn.</p>
+                <p>With over <strong>15,000+ titles</strong> across genres like fiction, self-help, and classics, we are committed to delivering the best reading experience.</p>
 
-                <h3>Tại sao chọn MÂY MƠ BOOK?</h3>
+                <h3>Why choose MÂY MƠ BOOK?</h3>
                 <ul class="about-features">
                     <li>
                         <i class="fas fa-check-circle"></i>
                         <div>
-                            <strong>Kho sách đa dạng</strong>
-                            <p>Hơn 15,000 đầu sách thuộc nhiều thể loại khác nhau</p>
+                            <strong>Diverse collection</strong>
+                            <p>Over 15,000 titles across multiple genres</p>
                         </div>
                     </li>
                     <li>
                         <i class="fas fa-check-circle"></i>
                         <div>
-                            <strong>Chi phí hợp lý</strong>
-                            <p>Chỉ trả tiền cho những ngày bạn thực sự đọc sách</p>
+                            <strong>Affordable pricing</strong>
+                            <p>Only pay for the days you actually read.</p>
                         </div>
                     </li>
                     <li>
                         <i class="fas fa-check-circle"></i>
                         <div>
-                            <strong>Giao hàng nhanh chóng</strong>
-                            <p>Miễn phí giao hàng cho đơn từ 3 cuốn trở lên</p>
+                            <strong>Fast delivery</strong>
+                            <p>Free shipping on orders of 3 or more books</p>
                         </div>
                     </li>
                     <li>
                         <i class="fas fa-check-circle"></i>
                         <div>
-                            <strong>Đổi trả dễ dàng</strong>
-                            <p>Chính sách đổi trả trong 7 ngày không phí</p>
+                            <strong>Easy returns</strong>
+                            <p>7-day no-fee return policy</p>
                         </div>
                     </li>
                 </ul>
@@ -76,19 +76,19 @@ $pageTitle = 'Về Chúng Tôi';
         <div class="stats-grid">
             <div class="stat-item animate-on-scroll animate-delay-1">
                 <div class="stat-number">15K+</div>
-                <div class="stat-label">Đầu sách</div>
+                <div class="stat-label">Titles</div>
             </div>
             <div class="stat-item animate-on-scroll animate-delay-2">
                 <div class="stat-number">50K+</div>
-                <div class="stat-label">Khách hàng</div>
+                <div class="stat-label">Customers</div>
             </div>
             <div class="stat-item animate-on-scroll animate-delay-3">
                 <div class="stat-number">100K+</div>
-                <div class="stat-label">Đơn hàng</div>
+                <div class="stat-label">Orders</div>
             </div>
             <div class="stat-item animate-on-scroll animate-delay-4">
                 <div class="stat-number">4.9/5</div>
-                <div class="stat-label">Đánh giá</div>
+                <div class="stat-label">Reviews</div>
             </div>
         </div>
     </div>
@@ -102,8 +102,8 @@ $pageTitle = 'Về Chúng Tôi';
                 <i class="fas fa-users"></i>
             </div>
             <div class="text-center mt-16">
-                <h2 class="section-title">Đội Ngũ Của Chúng Tôi</h2>
-                <p class="section-subtitle">Những người đam mê sách</p>
+                <h2 class="section-title">Our Team</h2>
+                <p class="section-subtitle">Passionate book lovers</p>
             </div>
         </div>
         
@@ -114,7 +114,7 @@ $pageTitle = 'Về Chúng Tôi';
                 </div>
                 <h3>Nguyễn Văn A</h3>
                 <p class="team-role">Founder & CEO</p>
-                <p class="team-desc">Đam mê sách từ nhỏ, mong muốn lan tỏa văn hóa đọc đến mọi người.</p>
+                <p class="team-desc">Passionate about books and dedicated to spreading the reading culture.</p>
             </div>
             <div class="team-card animate-on-scroll animate-delay-2">
                 <div class="team-avatar">
@@ -122,7 +122,7 @@ $pageTitle = 'Về Chúng Tôi';
                 </div>
                 <h3>Trần Thị B</h3>
                 <p class="team-role">Head of Operations</p>
-                <p class="team-desc">Đảm bảo mọi đơn hàng được xử lý nhanh chóng và chính xác.</p>
+                <p class="team-desc">Ensuring every order is handled quickly and accurately.</p>
             </div>
             <div class="team-card animate-on-scroll animate-delay-3">
                 <div class="team-avatar">
@@ -130,7 +130,7 @@ $pageTitle = 'Về Chúng Tôi';
                 </div>
                 <h3>Lê Văn C</h3>
                 <p class="team-role">Head of Technology</p>
-                <p class="team-desc">Xây dựng nền tảng công nghệ hiện đại, phục vụ khách hàng tốt nhất.</p>
+                <p class="team-desc">Building modern technology to serve customers better.</p>
             </div>
         </div>
     </div>

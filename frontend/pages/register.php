@@ -17,19 +17,19 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $fullName = trim($_POST['full_name'] ?? '');
     
     if (empty($username) || empty($email) || empty($password) || empty($fullName)) {
-        $error = 'Vui lòng điền đầy đủ thông tin bắt buộc.';
+        $error = 'Please fill in all required fields.';
     } elseif ($password !== $confirmPassword) {
-        $error = 'Mật khẩu không khớp.';
+        $error = 'Passwords do not match.';
     } elseif (strlen($password) < 6) {
-        $error = 'Mật khẩu phải có ít nhất 6 ký tự.';
+        $error = 'Password must be at least 6 characters.';
     } else {
         require_once __DIR__ . '/../../backend/models/User.php';
         $userModel = new User();
         
         if ($userModel->findByUsername($username)) {
-            $error = 'Tên đăng nhập đã tồn tại.';
+            $error = 'Username already exists.';
         } elseif ($userModel->findByEmail($email)) {
-            $error = 'Email đã được sử dụng.';
+            $error = 'Email is already in use.';
         } else {
             $userId = $userModel->create([
                 'username' => $username,
@@ -42,7 +42,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             ]);
             
             if ($userId) {
-                $success = 'Đăng ký thành công! Vui lòng đăng nhập.';
+                $success = 'Registration successful! Please log in.';
             } else {
                 $error = 'Đăng ký thất bại. Vui lòng thử lại.';
             }
@@ -58,8 +58,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         </div>
         
         <div class="auth-header">
-            <h2>Tạo Tài Khoản</h2>
-            <p>Tham gia BookRent ngay hôm nay</p>
+            <h2>Create an Account</h2>
+            <p>Join BookRent today</p>
         </div>
         
         <?php if ($error): ?>
@@ -83,13 +83,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         
         <form method="POST">
             <div class="form-group">
-                <label>Họ và Tên *</label>
-                <input type="text" name="full_name" class="form-control" placeholder="Nguyễn Văn A" required>
+                <label>Full Name *</label>
+                <input type="text" name="full_name" class="form-control" placeholder="John Doe" required>
             </div>
             
             <div class="form-group">
-                <label>Tên Đăng Nhập *</label>
-                <input type="text" name="username" class="form-control" placeholder="nguyenvana" required>
+                <label>Username *</label>
+                <input type="text" name="username" class="form-control" placeholder="johndoe" required>
             </div>
             
             <div class="form-group">
@@ -98,24 +98,24 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             </div>
             
             <div class="form-group">
-                <label>Mật Khẩu *</label>
-                <input type="password" name="password" class="form-control" placeholder="Ít nhất 6 ký tự" required>
+                <label>Password *</label>
+                <input type="password" name="password" class="form-control" placeholder="At least 6 characters" required>
             </div>
             
             <div class="form-group">
-                <label>Xác Nhận Mật Khẩu *</label>
-                <input type="password" name="confirm_password" class="form-control" placeholder="Nhập lại mật khẩu" required>
+                <label>Confirm Password *</label>
+                <input type="password" name="confirm_password" class="form-control" placeholder="Re-enter password" required>
             </div>
             
             <button type="submit" class="btn btn-primary btn-lg" style="width: 100%;">
-                <i class="fas fa-user-plus"></i> Đăng Ký
+                <i class="fas fa-user-plus"></i> Register
             </button>
         </form>
         
         <?php endif; ?>
         
         <div class="auth-footer">
-            <p>Đã có tài khoản? <a href="login.php">Đăng Nhập</a></p>
+            <p>Already have an account? <a href="login.php">Login</a></p>
         </div>
     </div>
 </section>

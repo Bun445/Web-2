@@ -84,7 +84,7 @@ $currentTab = $_GET['tab'] ?? 'inbox';
             </div>
             <div class="stat-info">
                 <span class="stat-value"><?php echo $unreadCount; ?></span>
-                <span class="stat-label">Chưa đọc</span>
+                <span class="stat-label">Unread</span>
             </div>
         </div>
         <div class="stat-card">
@@ -102,7 +102,7 @@ $currentTab = $_GET['tab'] ?? 'inbox';
             </div>
             <div class="stat-info">
                 <span class="stat-value"><?php echo count($adminSentMessages); ?></span>
-                <span class="stat-label">Đã gửi</span>
+                <span class="stat-label">Sent</span>
             </div>
         </div>
     </div>
@@ -116,14 +116,14 @@ $currentTab = $_GET['tab'] ?? 'inbox';
             <div class="messages-tabs">
                 <a href="messages.php?tab=inbox" class="tab-btn <?php echo $currentTab === 'inbox' ? 'active' : ''; ?>">
                     <i class="fas fa-inbox"></i>
-                    <span>Hộp thư đến</span>
+                    <span>Inbox</span>
                     <?php if ($unreadCount > 0): ?>
                     <span class="tab-badge"><?php echo $unreadCount; ?></span>
                     <?php endif; ?>
                 </a>
                 <a href="messages.php?tab=sent" class="tab-btn <?php echo $currentTab === 'sent' ? 'active' : ''; ?>">
                     <i class="fas fa-paper-plane"></i>
-                    <span>Đã gửi</span>
+                    <span>Sent</span>
                 </a>
                 <a href="messages.php?tab=system" class="tab-btn <?php echo $currentTab === 'system' ? 'active' : ''; ?>">
                     <i class="fas fa-bell"></i>
@@ -138,7 +138,7 @@ $currentTab = $_GET['tab'] ?? 'inbox';
                     <input type="hidden" name="action" value="mark_read">
                     <button type="submit" class="toolbar-btn">
                         <i class="fas fa-check-double"></i>
-                        <span>Đánh dấu tất cả đã đọc</span>
+                        <span>Mark all as read</span>
                     </button>
                 </form>
                 <?php endif; ?>
@@ -182,7 +182,7 @@ $currentTab = $_GET['tab'] ?? 'inbox';
                                     <?php 
                                     if ($msg['type'] === 'system') echo 'Hệ thống';
                                     elseif ($msg['type'] === 'admin_to_user') echo 'Gửi: ' . htmlspecialchars($msg['receiver_name'] ?? 'User');
-                                    else echo htmlspecialchars($msg['sender_name'] ?? 'Người dùng');
+                                    else echo htmlspecialchars($msg['sender_name'] ?? 'User');
                                     ?>
                                 </span>
                                 <span class="message-time"><?php echo timeAgo($msg['created_at']); ?></span>
@@ -204,8 +204,8 @@ $currentTab = $_GET['tab'] ?? 'inbox';
                         <div class="empty-icon">
                             <i class="fas fa-inbox"></i>
                         </div>
-                        <h3>Không có tin nhắn</h3>
-                        <p>Không có tin nhắn nào trong mục này.</p>
+                        <h3>No messages</h3>
+                        <p>There are no messages in this section.</p>
                     </div>
                 <?php endif; ?>
             </div>
@@ -223,7 +223,7 @@ $currentTab = $_GET['tab'] ?? 'inbox';
                     <form method="POST" class="delete-form-inline">
                         <input type="hidden" name="action" value="delete">
                         <input type="hidden" name="message_id" value="<?php echo $viewMessage['id']; ?>">
-                        <button type="submit" class="action-btn-delete" onclick="return confirm('Xóa tin nhắn này?')">
+                        <button type="submit" class="action-btn-delete" onclick="return confirm('Delete this message?')">
                             <i class="fas fa-trash"></i>
                         </button>
                     </form>
@@ -242,8 +242,8 @@ $currentTab = $_GET['tab'] ?? 'inbox';
                             <i class="fas fa-paper-plane"></i>
                         </div>
                         <div class="sender-info-text">
-                            <span class="sender-name-lg">Gửi đến: <?php echo htmlspecialchars($viewMessage['receiver_name'] ?? 'Người dùng'); ?></span>
-                            <span class="sender-email-lg">Tin nhắn đã gửi</span>
+                            <span class="sender-name-lg">Sent to: <?php echo htmlspecialchars($viewMessage['receiver_name'] ?? 'User'); ?></span>
+                            <span class="sender-email-lg">Sent message</span>
                         </div>
                         <?php elseif ($viewMessage['sender_name']): ?>
                         <div class="sender-avatar-lg user">
@@ -294,9 +294,9 @@ $currentTab = $_GET['tab'] ?? 'inbox';
                         </div>
                         
                         <div class="form-group">
-                            <label><i class="fas fa-heading"></i> Tiêu đề</label>
+                            <label><i class="fas fa-heading"></i> Subject</label>
                             <input type="text" name="subject" class="form-control" 
-                                   placeholder="Nhập tiêu đề..." required>
+                                   placeholder="Enter a subject..." required>
                         </div>
                         
                         <div class="form-group">
@@ -307,10 +307,10 @@ $currentTab = $_GET['tab'] ?? 'inbox';
                         
                         <div class="form-actions">
                             <button type="button" class="btn-cancel" onclick="hideReplyForm()">
-                                <i class="fas fa-times"></i> Hủy
+                                <i class="fas fa-times"></i> Cancel
                             </button>
                             <button type="submit" class="btn-send">
-                                <i class="fas fa-paper-plane"></i> Gửi
+                                <i class="fas fa-paper-plane"></i> Send
                             </button>
                         </div>
                     </form>
@@ -325,7 +325,7 @@ $currentTab = $_GET['tab'] ?? 'inbox';
             <div class="sidebar-card">
                 <h3 class="card-title">
                     <i class="fas fa-paper-plane"></i>
-                    Gửi Thông Báo
+                    Send Notification
                 </h3>
                 
                 <?php if (isset($_SESSION['success'])): ?>
@@ -346,10 +346,10 @@ $currentTab = $_GET['tab'] ?? 'inbox';
                     <input type="hidden" name="action" value="reply">
                     
                     <div class="form-group">
-                        <label><i class="fas fa-user"></i> Người dùng</label>
-                        <input type="text" id="userSearch" class="form-control" placeholder="Tìm theo tên hoặc username..." style="margin-bottom:8px;">
+                        <label><i class="fas fa-user"></i> User</label>
+                        <input type="text" id="userSearch" class="form-control" placeholder="Search by name or username..." style="margin-bottom:8px;">
                         <select name="user_id" class="form-control" required>
-                            <option value="">-- Chọn người dùng --</option>
+                            <option value="">-- Select a user --</option>
                             <?php foreach ($users as $u): ?>
                             <option value="<?php echo $u['id']; ?>" data-search="<?php echo htmlspecialchars(strtolower(($u['full_name'] ?? '') . ' ' . ($u['username'] ?? ''))); ?>" <?php echo $selectedUserId === intval($u['id']) ? 'selected' : ''; ?>>
                                 <?php echo htmlspecialchars($u['full_name']); ?> (<?php echo htmlspecialchars($u['username']); ?>)
@@ -359,8 +359,8 @@ $currentTab = $_GET['tab'] ?? 'inbox';
                     </div>
                     
                     <div class="form-group">
-                        <label><i class="fas fa-heading"></i> Tiêu đề</label>
-                        <input type="text" name="subject" class="form-control" placeholder="Nhập tiêu đề..." required>
+                        <label><i class="fas fa-heading"></i> Subject</label>
+                        <input type="text" name="subject" class="form-control" placeholder="Enter a subject..." required>
                     </div>
                     
                     <div class="form-group">
@@ -369,7 +369,7 @@ $currentTab = $_GET['tab'] ?? 'inbox';
                     </div>
                     
                     <button type="submit" class="btn-send-full">
-                        <i class="fas fa-paper-plane"></i> Gửi tin nhắn
+                        <i class="fas fa-paper-plane"></i> Send tin nhắn
                     </button>
                 </form>
             </div>

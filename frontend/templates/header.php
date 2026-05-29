@@ -109,7 +109,7 @@ $currentPage = basename($_SERVER['PHP_SELF']);
                         </a>
                         
                         <a href="notifications.php" class="nav-link <?php echo $currentPage == 'notifications.php' ? 'active' : ''; ?>">
-                            <i class="fas fa-bell"></i> Thông Báo
+                            <i class="fas fa-bell"></i> Notifications
                             <?php if (isset($unreadMessages) && $unreadMessages > 0): ?>
                             <span class="cart-count"><?php echo $unreadMessages; ?></span>
                             <?php endif; ?>
@@ -127,7 +127,7 @@ $currentPage = basename($_SERVER['PHP_SELF']);
                                     </div>
                                     <div class="dropdown-divider"></div>
                                     <a href="notifications.php" class="dropdown-item">
-                                        <i class="fas fa-bell"></i> Thông Báo
+                                        <i class="fas fa-bell"></i> Notifications
                                         <?php if (isset($unreadMessages) && $unreadMessages > 0): ?>
                                         <span class="dropdown-badge"><?php echo $unreadMessages; ?></span>
                                         <?php endif; ?>
