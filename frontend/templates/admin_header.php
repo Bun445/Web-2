@@ -81,26 +81,26 @@ $currentDir = basename(dirname($_SERVER['PHP_SELF']));
         
         <nav class="sidebar-nav">
             <div class="sidebar-nav-section">
-                <span class="sidebar-nav-label">Main Management</span>
+                <span class="sidebar-nav-label">Quản lý chính</span>
                 <a href="index.php" class="sidebar-nav-item <?php echo $currentPage == 'index.php' ? 'active' : ''; ?>">
                     <i class="fas fa-chart-pie"></i>
                     <span>Dashboard</span>
                 </a>
                 <a href="books.php" class="sidebar-nav-item <?php echo $currentPage == 'books.php' ? 'active' : ''; ?>">
                     <i class="fas fa-book"></i>
-                    <span>Book Management</span>
+                    <span>Quản lý sách</span>
                 </a>
                 <a href="rentals.php" class="sidebar-nav-item <?php echo $currentPage == 'rentals.php' ? 'active' : ''; ?>">
                     <i class="fas fa-exchange-alt"></i>
-                    <span>Rental Management</span>
+                    <span>Quản lý thuê sách</span>
                 </a>
                 <a href="users.php" class="sidebar-nav-item <?php echo $currentPage == 'users.php' ? 'active' : ''; ?>">
                     <i class="fas fa-users"></i>
-                    <span>Customer Management</span>
+                    <span>Quản lý khách</span>
                 </a>
                 <a href="messages.php" class="sidebar-nav-item <?php echo $currentPage == 'messages.php' ? 'active' : ''; ?>">
                     <i class="fas fa-envelope"></i>
-                    <span>Messages</span>
+                    <span>Tin nhắn</span>
                     <?php if ($unreadCount > 0): ?>
                     <span class="sidebar-badge"><?php echo $unreadCount; ?></span>
                     <?php endif; ?>
@@ -108,12 +108,12 @@ $currentDir = basename(dirname($_SERVER['PHP_SELF']));
             </div>
             
             <div class="sidebar-nav-section">
-                <span class="sidebar-nav-label">Settings</span>
+                <span class="sidebar-nav-label">Cài đặt</span>
                 <a href="settings.php" class="sidebar-nav-item <?php echo $currentPage == 'settings.php' ? 'active' : ''; ?>">
                     <i class="fas fa-cog"></i>
-                    <span>Settings</span>
+                    <span>Cài đặt</span>
                 </a>
-                <a href="../logout.php" class="sidebar-nav-item" onclick="return confirm('Are you sure you want to log out?')">
+                <a href="../logout.php" class="sidebar-nav-item" onclick="return confirm('Bạn có chắc chắn muốn đăng xuất?')">
                     <i class="fas fa-sign-out-alt"></i>
                     <span>Đăng xuất</span>
                 </a>
@@ -127,7 +127,7 @@ $currentDir = basename(dirname($_SERVER['PHP_SELF']));
                 </div>
                 <div class="sidebar-admin-info">
                     <div class="sidebar-admin-name"><?php echo htmlspecialchars($user['full_name'] ?? 'Admin'); ?></div>
-                    <div class="sidebar-admin-role">Administrator</div>
+                    <div class="sidebar-admin-role">Quản trị viên</div>
                 </div>
             </div>
         </div>
@@ -158,16 +158,16 @@ $currentDir = basename(dirname($_SERVER['PHP_SELF']));
                     </button>
                     <div class="topbar-dropdown-menu" id="notificationMenu">
                         <div class="dropdown-header">
-                            <span>Notifications</span>
-                            <a href="#" onclick="markAllNotificationsRead(); return false;">Mark all as read</a>
+                            <span>Thông Báo</span>
+                            <a href="#" onclick="markAllNotificationsRead(); return false;">Đánh dấu tất cả đã đọc</a>
                         </div>
                         <div class="dropdown-list">
                             <?php if ($overdueCount > 0): ?>
                             <a href="rentals.php?status=overdue" class="dropdown-item-notif unread">
                                 <div class="notif-icon warning"><i class="fas fa-exclamation-circle"></i></div>
                                 <div class="notif-content">
-                                    <div class="notif-text">You have <?php echo $overdueCount; ?> overdue rentals</div>
-                                    <div class="notif-time">Requires attention</div>
+                                    <div class="notif-text">Có <?php echo $overdueCount; ?> đơn thuê bị quá hạn</div>
+                                    <div class="notif-time">Cần xử lý ngay</div>
                                 </div>
                             </a>
                             <?php endif; ?>
@@ -176,19 +176,19 @@ $currentDir = basename(dirname($_SERVER['PHP_SELF']));
                                 <div class="notif-icon info"><i class="fas fa-envelope"></i></div>
                                 <div class="notif-content">
                                     <div class="notif-text">Có <?php echo $unreadCount; ?> tin nhắn mới từ người dùng</div>
-                                    <div class="notif-time">Unread</div>
+                                    <div class="notif-time">Chưa đọc</div>
                                 </div>
                             </a>
                             <?php endif; ?>
                             <?php if ($overdueCount == 0 && $unreadCount == 0): ?>
                             <div class="dropdown-empty">
                                 <i class="fas fa-check-circle"></i>
-                                <span>No new notifications</span>
+                                <span>Không có thông báo mới</span>
                             </div>
                             <?php endif; ?>
                         </div>
                         <div class="dropdown-footer">
-                            <a href="rentals.php?status=overdue">View overdue rentals</a>
+                            <a href="rentals.php?status=overdue">Xem đơn quá hạn</a>
                         </div>
                     </div>
                 </div>
@@ -203,8 +203,8 @@ $currentDir = basename(dirname($_SERVER['PHP_SELF']));
                     </button>
                     <div class="topbar-dropdown-menu" id="messageMenu">
                         <div class="dropdown-header">
-                            <span>Messages</span>
-                            <a href="messages.php">View all</a>
+                            <span>Tin Nhắn</span>
+                            <a href="messages.php">Xem tất cả</a>
                         </div>
                         <div class="dropdown-list">
                             <?php if (count($unreadMessagesList) > 0): ?>
@@ -220,8 +220,8 @@ $currentDir = basename(dirname($_SERVER['PHP_SELF']));
                                     <div class="message-content">
                                         <div class="message-sender">
                                             <?php 
-                                            if ($msg['type'] === 'system') echo 'System';
-                                            else echo htmlspecialchars($msg['sender_name'] ?? 'Unknown');
+                                            if ($msg['type'] === 'system') echo 'Hệ thống';
+                                            else echo htmlspecialchars($msg['sender_name'] ?? 'Không xác định');
                                             ?>
                                         </div>
                                         <div class="message-text"><?php echo htmlspecialchars($msg['subject'] ?: mb_substr($msg['content'], 0, 30) . '...'); ?></div>
@@ -232,12 +232,12 @@ $currentDir = basename(dirname($_SERVER['PHP_SELF']));
                             <?php else: ?>
                                 <div class="dropdown-empty">
                                     <i class="fas fa-inbox"></i>
-                                    <span>No messages yet</span>
+                                    <span>Không có tin nhắn nào</span>
                                 </div>
                             <?php endif; ?>
                         </div>
                         <div class="dropdown-footer">
-                            <a href="messages.php">Go to inbox</a>
+                            <a href="messages.php">Đến hộp thư</a>
                         </div>
                     </div>
                 </div>

@@ -106,7 +106,7 @@ function openQuickView(bookId) {
                 modal.querySelector('.qv-title').textContent = book.title;
                 modal.querySelector('.qv-author').textContent = book.author;
                 modal.querySelector('.qv-price').textContent = formatCurrency(book.price_per_day);
-                modal.querySelector('.qv-description').textContent = book.description || 'No description available';
+                modal.querySelector('.qv-description').textContent = book.description || 'Không có mô tả';
                 modal.classList.add('active');
                 document.body.style.overflow = 'hidden';
             }
@@ -146,11 +146,11 @@ function toggleWishlist(btn, bookId) {
     if (isActive) {
         btn.classList.remove('active');
         icon.className = 'far fa-heart';
-        showToast('Removed from favorites', 'info');
+        showToast('Đã xóa khỏi yêu thích', 'info');
     } else {
         btn.classList.add('active');
         icon.className = 'fas fa-heart';
-        showToast('Added to favorites', 'success');
+        showToast('Đã thêm vào yêu thích', 'success');
         try {
             const rect = btn.getBoundingClientRect();
             createHeartBurst(rect.left + rect.width/2, rect.top + rect.height/2, 'var(--danger)');
@@ -253,7 +253,7 @@ function addToCartWithAnimation(bookId, btn) {
 
     const originalContent = btn ? btn.innerHTML : '';
     if (btn) {
-        btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Adding...';
+        btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Đang thêm...';
         btn.disabled = true;
     }
 
@@ -289,14 +289,14 @@ function addToCartWithAnimation(bookId, btn) {
                 createParticleBurst(rect.left + rect.width / 2, rect.top + rect.height / 2, getComputedStyle(document.documentElement).getPropertyValue('--accent') || '#F59E0B');
             }
 
-            showToast('Added to cart', 'success');
+            showToast('Đã thêm vào giỏ hàng', 'success');
         } else {
-            showToast(result.message || 'Could not add to cart', 'error');
+            showToast(result.message || 'Không thể thêm vào giỏ', 'error');
             if (btn) btn.innerHTML = originalContent;
         }
     })
     .catch(() => {
-        showToast('An error occurred', 'error');
+        showToast('Đã xảy ra lỗi', 'error');
         if (btn) btn.innerHTML = originalContent;
     })
     .finally(() => {
@@ -453,7 +453,7 @@ function initAnimations() {
 // UTILITIES
 // =====================================================
 function formatCurrency(amount) {
-    return new Intl.NumberFormat('en-US').format(amount) + 'đ';
+    return new Intl.NumberFormat('vi-VN').format(amount) + 'đ';
 }
 
 function debounce(func, wait) {
@@ -501,14 +501,14 @@ function applyCoupon() {
         .then(res => res.json())
         .then(result => {
             if (result.success) {
-                showToast('Discount code applied successfully!', 'success');
+                showToast('Áp dụng mã giảm giá thành công!', 'success');
                 // Update total with discount
                 const totalEl = document.querySelector('.cart-total');
                 if (totalEl) {
                     totalEl.textContent = formatCurrency(result.newTotal);
                 }
             } else {
-                showToast(result.message || 'Invalid discount code', 'error');
+                showToast(result.message || 'Mã giảm giá không hợp lệ', 'error');
             }
         })
         .catch(() => showToast('Đã xảy ra lỗi', 'error'));

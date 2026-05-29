@@ -32,7 +32,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         if ($searchCode) {
             $searchResult = $rentalController->getRentalByCode($searchCode);
             if (!$searchResult) {
-                $message = 'No rental found with code: ' . htmlspecialchars($searchCode);
+                $message = 'Không tìm thấy đơn hàng có mã: ' . htmlspecialchars($searchCode);
                 $messageType = 'warning';
             }
         }
@@ -51,8 +51,8 @@ $stats = $rentalController->stats();
             <i class="fas fa-exchange-alt"></i>
         </div>
         <div>
-            <h1 class="page-header-title">Rental Management</h1>
-            <p class="page-header-subtitle">Review orders and confirm book pickups and returns</p>
+            <h1 class="page-header-title">Quản lý thuê sách</h1>
+            <p class="page-header-subtitle">Duyệt đơn hàng và xác nhận giao trả sách</p>
         </div>
     </div>
     <div>
@@ -81,7 +81,7 @@ $stats = $rentalController->stats();
             </div>
         </div>
         <div class="stat-card-value"><?php echo $stats['active_rentals']; ?></div>
-        <div class="stat-card-label">Active rentals</div>
+        <div class="stat-card-label">Đang thuê</div>
     </div>
     
     <div class="stat-card-admin">
@@ -91,7 +91,7 @@ $stats = $rentalController->stats();
             </div>
         </div>
         <div class="stat-card-value"><?php echo $stats['overdue_rentals']; ?></div>
-        <div class="stat-card-label">Overdue</div>
+        <div class="stat-card-label">Quá hạn</div>
     </div>
     
     <div class="stat-card-admin">
@@ -101,7 +101,7 @@ $stats = $rentalController->stats();
             </div>
         </div>
         <div class="stat-card-value"><?php echo $stats['returned_rentals']; ?></div>
-        <div class="stat-card-label">Returned</div>
+        <div class="stat-card-label">Đã trả</div>
     </div>
 </div>
 
@@ -116,19 +116,19 @@ $stats = $rentalController->stats();
 <!-- Search by Rental Code -->
 <div class="dashboard-card" style="margin-bottom: 20px;">
     <div class="dashboard-card-header">
-        <h3 class="dashboard-card-title">🔍 Search orders by code</h3>
+        <h3 class="dashboard-card-title">🔍 Duyệt đơn hàng theo mã</h3>
     </div>
     <div class="dashboard-card-body">
         <form method="POST" style="display: flex; gap: 10px; align-items: flex-end;">
             <input type="hidden" name="action" value="search_code">
             <div style="flex: 1;">
-                <label style="display: block; margin-bottom: 8px; font-weight: 500; color: var(--text-primary);">Order code</label>
+                <label style="display: block; margin-bottom: 8px; font-weight: 500; color: var(--text-primary);">Mã đơn hàng</label>
                 <input type="text" name="rental_code" placeholder="Nhập mã đơn hàng (ví dụ: WB9F2A1C)" 
                        value="<?php echo htmlspecialchars($searchCode); ?>"
                        style="width: 100%; padding: 10px 12px; border: 1px solid var(--border-color); border-radius: 6px; background: var(--bg-secondary); color: var(--text-primary);">
             </div>
             <button type="submit" class="btn btn-primary" style="height: 40px; padding: 0 20px;">
-                <i class="fas fa-search"></i> Search
+                <i class="fas fa-search"></i> Tìm kiếm
             </button>
             <a href="rentals.php" class="btn btn-outline" style="height: 40px; padding: 0 20px;">
                 <i class="fas fa-redo"></i> Hủy
@@ -141,19 +141,19 @@ $stats = $rentalController->stats();
 <?php if ($searchResult && !$message): ?>
 <div class="dashboard-card" style="margin-bottom: 20px; border: 2px solid var(--green-primary);">
     <div class="dashboard-card-header" style="background: rgba(34, 197, 94, 0.1);">
-        <h3 class="dashboard-card-title">✅ Search results: <?php echo htmlspecialchars($searchCode); ?></h3>
+        <h3 class="dashboard-card-title">✅ Kết quả tìm kiếm: <?php echo htmlspecialchars($searchCode); ?></h3>
     </div>
     <div class="dashboard-card-body">
         <table class="data-table">
             <thead>
                 <tr>
-                    <th>Customer</th>
-                    <th>Book</th>
-                    <th>Rental Date</th>
+                    <th>Khách hàng</th>
+                    <th>Sách</th>
+                    <th>Ngày thuê</th>
                     <th>Hạn trả</th>
                     <th>Tổng tiền</th>
-                    <th>Status</th>
-                    <th>Action</th>
+                    <th>Trạng thái</th>
+                    <th>Thao tác</th>
                 </tr>
             </thead>
             <tbody>
@@ -190,9 +190,9 @@ $stats = $rentalController->stats();
                         <?php if ($searchResult['status'] === 'active'): ?>
                         <div style="font-size: 0.75rem; margin-top: 4px;">
                             <?php if ($isOverdue): ?>
-                            <span style="color: var(--danger);"><?php echo abs(round($daysLeft)); ?> days overdue</span>
+                            <span style="color: var(--danger);"><?php echo abs(round($daysLeft)); ?> ngày quá hạn</span>
                             <?php else: ?>
-                            <span style="color: var(--green-primary);"><?php echo round($daysLeft); ?> days remaining</span>
+                            <span style="color: var(--green-primary);"><?php echo round($daysLeft); ?> ngày còn lại</span>
                             <?php endif; ?>
                         </div>
                         <?php endif; ?>
@@ -204,10 +204,10 @@ $stats = $rentalController->stats();
                         <?php 
                         $statusMap = [
                             'pending' => ['label' => 'Chờ lấy', 'class' => 'badge-warning'],
-                            'active' => ['label' => 'Active', 'class' => 'badge-success'],
-                            'returned' => ['label' => 'Returned', 'class' => 'badge-secondary'],
-                            'overdue' => ['label' => 'Overdue', 'class' => 'badge-danger'],
-                            'cancelled' => ['label' => 'Cancelled', 'class' => 'badge-secondary']
+                            'active' => ['label' => 'Đang thuê', 'class' => 'badge-success'],
+                            'returned' => ['label' => 'Đã trả', 'class' => 'badge-secondary'],
+                            'overdue' => ['label' => 'Quá hạn', 'class' => 'badge-danger'],
+                            'cancelled' => ['label' => 'Đã hủy', 'class' => 'badge-secondary']
                         ];
                         $st = $statusMap[$searchResult['status']] ?? ['label' => $searchResult['status'], 'class' => 'badge-secondary'];
                         ?>
@@ -220,22 +220,22 @@ $stats = $rentalController->stats();
                         <form method="POST" style="display: inline;">
                             <input type="hidden" name="action" value="return">
                             <input type="hidden" name="id" value="<?php echo $searchResult['id']; ?>">
-                            <button type="submit" class="btn btn-sm btn-success" onclick="return confirm('Confirm the book has been returned?')">
-                                <i class="fas fa-check"></i> Mark Returned
+                            <button type="submit" class="btn btn-sm btn-success" onclick="return confirm('Xác nhận khách đã trả sách?')">
+                                <i class="fas fa-check"></i> Trả sách
                             </button>
                         </form>
                         <?php elseif ($searchResult['status'] === 'pending'): ?>
                         <form method="POST" style="display: inline; gap: 8px;">
                             <input type="hidden" name="action" value="confirm_pickup">
                             <input type="hidden" name="id" value="<?php echo $searchResult['id']; ?>">
-                            <button type="submit" class="btn btn-sm btn-primary" onclick="return confirm('Confirm the book has been picked up?')">
-                                <i class="fas fa-handshake"></i> Picked Up
+                            <button type="submit" class="btn btn-sm btn-primary" onclick="return confirm('Xác nhận khách đã lấy sách?')">
+                                <i class="fas fa-handshake"></i> Đã lấy
                             </button>
                         </form>
                         <form method="POST" style="display: inline;">
                             <input type="hidden" name="action" value="cancel">
                             <input type="hidden" name="id" value="<?php echo $searchResult['id']; ?>">
-                            <button type="submit" class="btn btn-sm btn-danger" onclick="return confirm('Cancel this order?')">
+                            <button type="submit" class="btn btn-sm btn-danger" onclick="return confirm('Hủy đơn hàng này?')">
                                 <i class="fas fa-times"></i> Hủy
                             </button>
                         </form>
@@ -269,13 +269,13 @@ $stats = $rentalController->stats();
             <thead>
                 <tr>
                     <th>Mã đơn</th>
-                    <th>Customer</th>
-                    <th>Book</th>
-                    <th>Rental Date</th>
+                    <th>Khách hàng</th>
+                    <th>Sách</th>
+                    <th>Ngày thuê</th>
                     <th>Hạn trả</th>
                     <th>Tổng tiền</th>
-                    <th>Status</th>
-                    <th>Action</th>
+                    <th>Trạng thái</th>
+                    <th>Thao tác</th>
                 </tr>
             </thead>
             <tbody>
@@ -315,9 +315,9 @@ $stats = $rentalController->stats();
                         <?php if ($rental['status'] === 'active'): ?>
                         <div style="font-size: 0.75rem; margin-top: 4px;">
                             <?php if ($isOverdue): ?>
-                            <span style="color: var(--danger);"><?php echo abs(round($daysLeft)); ?> days overdue</span>
+                            <span style="color: var(--danger);"><?php echo abs(round($daysLeft)); ?> ngày quá hạn</span>
                             <?php else: ?>
-                            <span style="color: var(--green-primary);"><?php echo round($daysLeft); ?> days remaining</span>
+                            <span style="color: var(--green-primary);"><?php echo round($daysLeft); ?> ngày còn lại</span>
                             <?php endif; ?>
                         </div>
                         <?php endif; ?>
@@ -329,10 +329,10 @@ $stats = $rentalController->stats();
                         <?php 
                         $statusMap = [
                             'pending' => ['label' => 'Chờ lấy', 'class' => 'badge-warning'],
-                            'active' => ['label' => 'Active', 'class' => 'badge-success'],
-                            'returned' => ['label' => 'Returned', 'class' => 'badge-secondary'],
-                            'overdue' => ['label' => 'Overdue', 'class' => 'badge-danger'],
-                            'cancelled' => ['label' => 'Cancelled', 'class' => 'badge-secondary']
+                            'active' => ['label' => 'Đang thuê', 'class' => 'badge-success'],
+                            'returned' => ['label' => 'Đã trả', 'class' => 'badge-secondary'],
+                            'overdue' => ['label' => 'Quá hạn', 'class' => 'badge-danger'],
+                            'cancelled' => ['label' => 'Đã hủy', 'class' => 'badge-secondary']
                         ];
                         $st = $statusMap[$rental['status']] ?? ['label' => $rental['status'], 'class' => 'badge-secondary'];
                         ?>
@@ -345,22 +345,22 @@ $stats = $rentalController->stats();
                         <form method="POST" style="display: inline;">
                             <input type="hidden" name="action" value="return">
                             <input type="hidden" name="id" value="<?php echo $rental['id']; ?>">
-                            <button type="submit" class="btn btn-sm btn-success" onclick="return confirm('Confirm the book has been returned?')">
-                                <i class="fas fa-check"></i> Mark Returned
+                            <button type="submit" class="btn btn-sm btn-success" onclick="return confirm('Xác nhận khách đã trả sách?')">
+                                <i class="fas fa-check"></i> Trả sách
                             </button>
                         </form>
                         <?php elseif ($rental['status'] === 'pending'): ?>
                         <form method="POST" style="display: inline; gap: 8px;">
                             <input type="hidden" name="action" value="confirm_pickup">
                             <input type="hidden" name="id" value="<?php echo $rental['id']; ?>">
-                            <button type="submit" class="btn btn-sm btn-primary" onclick="return confirm('Confirm the book has been picked up?')">
-                                <i class="fas fa-handshake"></i> Picked Up
+                            <button type="submit" class="btn btn-sm btn-primary" onclick="return confirm('Xác nhận khách đã lấy sách?')">
+                                <i class="fas fa-handshake"></i> Đã lấy
                             </button>
                         </form>
                         <form method="POST" style="display: inline;">
                             <input type="hidden" name="action" value="cancel">
                             <input type="hidden" name="id" value="<?php echo $rental['id']; ?>">
-                            <button type="submit" class="btn btn-sm btn-danger" onclick="return confirm('Cancel this order?')">
+                            <button type="submit" class="btn btn-sm btn-danger" onclick="return confirm('Hủy đơn hàng này?')">
                                 <i class="fas fa-times"></i> Hủy
                             </button>
                         </form>

@@ -2,8 +2,9 @@
    MÂY MƠ BOOK - Warm & Natural Book Store Design
    ===================================================== */
 
-/* Unified Futura font family */
-/* Using local Futura / fallback fonts */
+/* Google Fonts */
+@import url('https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@300;400;500;600;700;800&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;600;700&display=swap');
 
 /* CSS Variables - Warm & Natural Theme */
 :root {
@@ -93,7 +94,7 @@ html {
 }
 
 body {
-    font-family: 'Futura', 'Futura PT', 'Trebuchet MS', Arial, sans-serif;
+    font-family: 'Be Vietnam Pro', -apple-system, BlinkMacSystemFont, sans-serif;
     font-size: 15px;
     line-height: 1.6;
     color: var(--text-secondary);
@@ -478,7 +479,7 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .hero-content h1 {
-    font-family: 'Futura', 'Futura PT', 'Trebuchet MS', Arial, sans-serif;
+    font-family: 'Playfair Display', serif;
     font-size: 3.2rem;
     font-weight: 700;
     margin-bottom: 20px;
@@ -651,7 +652,7 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .section-title {
-    font-family: 'Futura', 'Futura PT', 'Trebuchet MS', Arial, sans-serif;
+    font-family: 'Playfair Display', serif;
     font-size: 1.75rem;
     font-weight: 700;
     color: var(--text-primary);
@@ -759,7 +760,7 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .category-card h4 {
-    font-family: 'Futura', 'Futura PT', 'Trebuchet MS', Arial, sans-serif;
+    font-family: 'Playfair Display', serif;
     font-size: 1.1rem;
     font-weight: 700;
     color: var(--text-primary);
@@ -842,7 +843,7 @@ h1, h2, h3, h4, h5, h6 {
     font-weight: 800;
     text-transform: uppercase;
     opacity: 0.4;
-    font-family: 'Futura', 'Futura PT', 'Trebuchet MS', Arial, sans-serif;
+    font-family: 'Playfair Display', serif;
 }
 
 .book-card:hover .book-cover-placeholder {
@@ -920,7 +921,7 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .book-title {
-    font-family: 'Futura', 'Futura PT', 'Trebuchet MS', Arial, sans-serif;
+    font-family: 'Playfair Display', serif;
     font-size: 1rem;
     font-weight: 600;
     color: var(--text-primary);
@@ -2032,7 +2033,7 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .quick-view-info h2 {
-    font-family: 'Futura', 'Futura PT', 'Trebuchet MS', Arial, sans-serif;
+    font-family: 'Playfair Display', serif;
     font-size: 1.75rem;
     margin-bottom: 8px;
 }
@@ -2560,7 +2561,7 @@ h1, h2, h3, h4, h5, h6 {
 
 .heart-particle {
     will-change: transform, opacity;
-    font-family: 'Futura', 'Futura PT', 'Trebuchet MS', Arial, sans-serif;
+    font-family: 'Playfair Display', serif;
     text-shadow: 0 2px 6px rgba(0,0,0,0.08);
 }
 

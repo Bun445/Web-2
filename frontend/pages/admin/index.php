@@ -337,7 +337,7 @@ document.addEventListener('DOMContentLoaded', function() {
                     displayColors: false,
                     callbacks: {
                         label: function(context) {
-                            return context.parsed.y.toLocaleString('en-US') + 'đ';
+                            return context.parsed.y.toLocaleString('vi-VN') + 'đ';
                         }
                     }
                 }

@@ -18,7 +18,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $remember = isset($_POST['remember']);
     
     if (empty($username) || empty($password)) {
-        $error = 'Please fill in all required fields.';
+        $error = 'Vui lòng điền đầy đủ thông tin.';
     } else {
         require_once __DIR__ . '/../../backend/models/User.php';
         $userModel = new User();
@@ -40,7 +40,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             header('Location: ' . ($user['role'] === 'admin' ? 'admin/index.php' : 'dashboard.php'));
             exit;
         } else {
-            $error = 'Incorrect username or password.';
+            $error = 'Tên đăng nhập hoặc mật khẩu không đúng.';
         }
     }
 }
@@ -53,8 +53,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         </div>
         
         <div class="auth-header">
-            <h2>Welcome Back</h2>
-            <p>Log in to your account</p>
+            <h2>Chào Mừng Trở Lại</h2>
+            <p>Đăng nhập vào tài khoản của bạn</p>
         </div>
         
         <?php if ($error): ?>
@@ -66,30 +66,30 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         
         <form method="POST">
             <div class="form-group">
-                <label>Username</label>
-                <input type="text" name="username" class="form-control" placeholder="Enter username" required autofocus>
+                <label>Tên Đăng Nhập</label>
+                <input type="text" name="username" class="form-control" placeholder="Nhập tên đăng nhập" required autofocus>
             </div>
             
             <div class="form-group">
-                <label>Password</label>
-                <input type="password" name="password" class="form-control" placeholder="Enter password" required>
+                <label>Mật Khẩu</label>
+                <input type="password" name="password" class="form-control" placeholder="Nhập mật khẩu" required>
             </div>
             
             <div class="form-group-remember">
                 <label class="checkbox-wrapper">
                     <input type="checkbox" name="remember" id="remember">
                     <span class="checkmark"></span>
-                    <span class="remember-text">Remember me</span>
+                    <span class="remember-text">Ghi nhớ đăng nhập</span>
                 </label>
             </div>
             
             <button type="submit" class="btn btn-primary btn-lg" style="width: 100%;">
-                <i class="fas fa-sign-in-alt"></i> Login
+                <i class="fas fa-sign-in-alt"></i> Đăng Nhập
             </button>
         </form>
         
         <div class="auth-footer">
-            <p>Don't have an account? <a href="register.php">Register now</a></p>
+            <p>Chưa có tài khoản? <a href="register.php">Đăng Ký Ngay</a></p>
         </div>
         
         <div style="margin-top: 24px; padding-top: 20px; border-top: 1px solid var(--border-color); text-align: center; font-size: 0.85rem; color: var(--text-muted);">
